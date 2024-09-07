@@ -66,3 +66,13 @@ python3 -m http.server 8080
 http://localhost:8080/index.html
 ```
 
+# 校园网服务器反向ssh隧道
+```
+# 校园网服务器（192.168.1.100）测试能不能访问外部公共ip机器（1.2.3.4）
+ssh user@1.2.3.4
+# 校园网服务器把本地端口映射到公共ip服务器上
+ssh -R [跳板机端口]:localhost:[校园网服务器端口] [跳板机用户]@[跳板机IP]
+ssh -R 2222:localhost:22 user@1.2.3.4
+# 通过公共ip服务器的跳板机端口连接校园网服务器
+ssh user@1.2.3.4 -p 2222
+```
