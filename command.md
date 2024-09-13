@@ -82,3 +82,28 @@ ssh -R 2222:localhost:22 user@1.2.3.4
 # 通过公共ip服务器的跳板机端口连接校园网服务器
 ssh user@1.2.3.4 -p 2222
 ```
+# 共享网络环境
+```
+# 使用动态端口转发
+DynamicForward 7890
+# 测试
+curl --socks5 localhost:7890 http://ifconfig.me
+# 使用curl下载文件
+curl --socks5 localhost:7890 -O http://example.com/file.zip
+# 使用docker代理/etc/systemd/system/docker.service.d/
+sudo mkdir -p /etc/systemd/system/docker.service.d/
+sudo nano /etc/systemd/system/docker.service.d/http-proxy.conf
+## 添加内容
+[Service]
+Environment="HTTP_PROXY=socks5://localhost:7890/"
+Environment="HTTPS_PROXY=socks5://localhost:7890/"
+# 使用git pull
+git config --global http.proxy 'socks5://localhost:7890'
+git config --global https.proxy 'socks5://localhost:7890'
+# 使用pip
+export ALL_PROXY=socks5://localhost:7890
+pip install <package-name>
+export HTTP_PROXY=socks5://localhost:7890
+export HTTPS_PROXY=socks5://localhost:7890
+```
+
