@@ -1,11 +1,12 @@
 # ssh检验
 ```
 ssh -F ~/.ssh/config -T git@github.com
+ssh -F ~/.ssh/config -o ServerAliveInterval=60 -o ServerAliveCountMax=3 -fNR 服务器ip1的开放映射转发端口:localhost:本地机器上的ssh连接端口22 user@ip1
 ```
 
 # git clone
 ```
-GIT_SSH_COMMAND='ssh -F ~/.ssh/config' git clone git@github.com:xmu-hph/repo.git
+GIT_SSH_COMMAND='ssh -F ~/.ssh/config' git clone git@github.com:users/repo.git
 ```
 # git push
 ```
@@ -22,6 +23,11 @@ nohup pip install -r requirements.txt > pip.log 2>&1 &
 # 删除环境
 env_name=$(basename $(pwd))
 conda remove -p ./envs/$env_name --all
+# 设置.env
+touch .env
+cat <<EOF > ./.env
+PYTHONPATH=$(pwd)/envs/${env_name}/bin/python
+EOF
 # 创建.condarc文件并写入以下内容
 touch ./.condarc
 cat <<EOF > ./.condarc
