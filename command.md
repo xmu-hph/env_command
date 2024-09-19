@@ -107,3 +107,24 @@ export HTTP_PROXY=socks5://localhost:7890
 export HTTPS_PROXY=socks5://localhost:7890
 ```
 
+# 安装cityflow-dev环境
+```
+# git clone 
+# 创建环境
+# 安装cityflow
+GIT_SSH_COMMAND='ssh -F ~/.ssh/config' pip install .
+# 升级自定义
+# 修改vehicle文件
+
+# 修改cmakfile文件
+## 手动设置 Python 的 include 和库文件路径
+set(PYTHON_INCLUDE_DIRS "/home/hph/code/dev_cityflow/envs/dev_cityflow/include/python3.9")
+set(PYTHON_LIBRARIES "/home/hph/code/dev_cityflow/envs/dev_cityflow/lib/libpython3.9.so")
+## 告诉 CMake 使用这些路径
+include_directories(${PYTHON_INCLUDE_DIRS})
+link_directories(${PYTHON_LIBRARIES})
+
+# 系统上安装pybind11
+sudo apt-get install pybind11-dev
+# 完成安装
+```
