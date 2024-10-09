@@ -128,3 +128,6 @@ link_directories(${PYTHON_LIBRARIES})
 sudo apt-get install pybind11-dev
 # 完成安装
 ```
+# 服务器安装vscode-server
+服务器无法连接公共网络时只能通过下载本地机器对应版本的commit到服务器上才可以。
+服务器需要下载插件时，如果同在一个局域网下，那么可以开启代理。如果不在一个局域网下，就下载对应版本的插件到服务器上，也是可以的。
